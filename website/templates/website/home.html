@@ -1,0 +1,68 @@
+{% extends "website/base.html" %}
+
+{% load static %}
+
+{% block title %}Home - My Portfolio{% endblock %}
+
+{% block content %}
+<!-- HERO -->
+<section class="text-center py-5 bg-primary text-white">
+  <div class="container">
+    <h1 style="font-size: 3.5rem; font-weight: 800; letter-spacing: -1px;">
+      Expand Your Business & Your Wallet
+    </h1>
+    <p style="font-size: 1.5rem; max-width: 750px; margin: 0 auto;">
+      Websites. Social Media. Branding. Everything you need to get your business online — without the big-agency price tag.
+    </p>
+    <a href="/growth" class="btn btn-light btn-lg mt-4" style="font-size: 1.25rem; padding: 0.75rem 2rem;">
+      Get Started Today
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES --> 
+<section class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5" style="font-size: 3rem; font-weight: 900; letter-spacing: -0.5px;">
+      Why Choose Us
+    </h2>
+    <div class="row text-center">
+      
+      <div class="col-md-4 mb-5">
+        <img src="{% static 'website/images/expand.jpg' %}" alt="Expand Your Reach" class="mb-4" style="max-width:140px;">
+        <h4 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 15px;">Expand Your Reach</h4>
+        <p style="font-size: 1.3rem; line-height: 1.8;">
+          Get found faster. We use smart SEO and AI-driven strategies to put your business in front of the right customers — and keep you there.
+        </p>
+      </div>
+      
+      <div class="col-md-4 mb-5">
+        <img src="{% static 'website/images/custom.jpg' %}" alt="Custom Design" class="mb-4" style="max-width:140px;">
+        <h4 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 15px;">Custom Design</h4>
+        <p style="font-size: 1.3rem; line-height: 1.8;">
+          Stand out online. Forget cookie-cutter templates — we craft websites that capture your brand’s personality and convert visitors into clients.
+        </p>
+      </div>
+      
+      <div class="col-md-4 mb-5">
+        <img src="{% static 'website/images/allinone.jpg' %}" alt="Social Media & Branding" class="mb-4" style="max-width:140px;">
+        <h4 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 15px;">Social Media & Branding</h4>
+        <p style="font-size: 1.3rem; line-height: 1.8;">
+          Be everywhere your customers are. From social media to Google, we create a unified online presence that builds trust and drives sales.
+        </p>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<section class="py-5 bg-primary text-white text-center">
+  <div class="container">
+    <h2>Ready to Get Your Website?</h2>
+    <p class="lead">Let's make it happen. Get in touch today!</p>
+    <a href="/contact" class="btn btn-light btn-lg mt-3">Contact Us</a>
+  </div> 
+</section>
+
+
+{% endblock %}
