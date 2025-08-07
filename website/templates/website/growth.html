@@ -1,0 +1,80 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Growth Plans - Webly{% endblock %}
+
+{% block content %}
+<section class="py-5 text-center bg-primary text-white">
+  <div class="container">
+    <h1 class="display-2 fw-bold">Choose Your Growth Plan</h1>
+    <p class="lead fs-4 mt-3">Flexible, affordable digital marketing packages that match your business goals and budget.</p>
+  </div>
+</section>
+
+<section class="py-5">
+  <div class="container">
+    <div class="row text-center">
+
+      <!-- Minimal-Growth -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-sm border-0">
+          <div class="card-body">
+            <h3 class="card-title fs-3">Minimal-Growth</h3>
+            <h4 class="text-success fs-4">$300/month</h4>
+            <ul class="list-unstyled mt-3 fs-5 text-start">
+              <li>✅ 1-Page Website (Home, About, Contact)</li>
+              <li>✅ Google Business Profile setup or refresh</li>
+              <li>✅ 1 Social Media platform branding setup</li>
+              <li>✅ 2 scheduled posts per week</li>
+              <li>✅ Monthly 15-minute check-in</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Standard-Growth -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow border border-primary">
+          <div class="card-body">
+            <h3 class="card-title text-primary fs-3">Standard-Growth</h3>
+            <h4 class="text-success fs-4">$450/month</h4>
+            <ul class="list-unstyled mt-3 fs-5 text-start">
+              <li>✅ Multi-page Website (up to 5 pages)</li>
+              <li>✅ Google Business + Analytics setup</li>
+              <li>✅ 3 Social Media platforms</li>
+              <li>✅ 3–4 weekly posts (branded & repurposed)</li>
+              <li>✅ 1 basic video ad per month</li>
+              <li>✅ Monthly performance report</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Explosive-Growth -->
+      <div class="col-md-4 mb-4">
+        <div class="card h-100 shadow-lg border-0 bg-light">
+          <div class="card-body">
+            <h3 class="card-title text-danger fs-3">Explosive-Growth</h3>
+            <h4 class="text-success fs-4">$700+/month</h4>
+            <ul class="list-unstyled mt-3 fs-5 text-start">
+              <li>✅ Everything in Standard</li>
+              <li>✅ Custom App or Client Portal (shop, booking, etc.)</li>
+              <li>✅ 5+ Platforms (as needed)</li>
+              <li>✅ 5–7 weekly posts (includes video support)</li>
+              <li>✅ 2 Edited Video Ads/month</li>
+              <li>✅ Review funnel setup (email/SMS automation)</li>
+              <li>✅ Quarterly strategy meeting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+      <p class="lead fs-4">💡 Save 20% when you commit to 6 months upfront. <br>Includes free setup on new social platforms as trends emerge.</p>
+      <a href="/contact" class="btn btn-primary btn-lg mt-3">Start Growing</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
