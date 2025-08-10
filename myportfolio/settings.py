@@ -25,8 +25,12 @@ SECRET_KEY = 'django-insecure-+&8w18hn=*43z%lvg9$4m*s!td37(axvn7j((^xu3$1a2e3s%l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "weblylocal.onrender.com", "weblylocal.com", "www.weblylocal.com"]
 
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://weblylocal.onrender.com","https://weblylocal.com","https://www.weblylocal.com"
+]
 
 # Application definition
 
