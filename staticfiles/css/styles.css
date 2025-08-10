@@ -1,0 +1,295 @@
+/*=========================================
+   WeblyLocal — Global Styles (Clean)
+   ========================================= */
+
+/* Brand tokens */
+:root {
+  --brand: #0072FF;          /* primary blue */
+  --brand-2: #00C6FF;        /* gradient buddy */
+  --bg: #ffffff;             /* page background (was blue by mistake) */
+  --text: #1f2937;           /* slate-800 */
+  --muted: #4b5563;          /* slate-600 */
+  --soft: #f6f8fb;           /* light section background */
+  --radius: 14px;
+  --shadow-1: 0 6px 18px rgba(0,0,0,.06);
+  --shadow-2: 0 12px 28px rgba(0,0,0,.12);
+  --webly-cyan: #1DCDD4;
+  --webly-blue-dark: #2464F2;
+  --webly-blue: #3498F3;
+  --webly-aqua: #23E3B3;
+  --webly-indigo: #432DF4;
+  --webly-blue-light: #94C1E3;
+}
+
+/* Base */
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol", sans-serif;
+  line-height: 1.5;
+  margin-top: 0;
+}
+
+/* Links */
+a { color: var(--brand); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Sections */
+.section { padding: 56px 0; }
+.section--soft { background: var(--soft); }
+
+/* Utilities */
+.shadow-1 { box-shadow: var(--shadow-1); }
+.shadow-2 { box-shadow: var(--shadow-2); }
+.rounded-xl { border-radius: var(--radius); }
+.bg-gradient-text {
+  background: linear-gradient(45deg, var(--brand-2), var(--brand));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* =========================================
+   Navbar – Minimal Monochrome + Accent Glow
+   ========================================= */
+.navbar {
+  box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+}
+.navbar .container { padding-top: 0; padding-bottom: 0; }
+
+.navbar-brand {
+  font-weight: 800;
+  letter-spacing: .5px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.15);
+}
+
+/* Bigger, clean buttons */
+.navbar .btn {
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: .6rem 1.4rem;
+  background: transparent;
+  color: #333;
+  border: 2px solid transparent;
+  transition: all .2s ease-in-out;
+}
+.navbar .navbar-nav .nav-item + .nav-item .btn { margin-left: .25rem; }
+
+/* Hover: subtle underline + brand color */
+.navbar .btn:hover {
+  border-bottom: 2px solid var(--brand);
+  border-radius: 0;
+  color: var(--brand);
+  background: transparent;
+}
+
+/* Active page: pill + glow */
+.navbar .btn.active {
+  background: var(--brand);
+  color: #fff !important;
+  border-radius: 50px;
+  box-shadow: 0 0 12px rgba(0,114,255,.6);
+}
+
+/* Kill Bootstrap’s click/focus coloring,
+   keep our active style intact */
+.navbar .btn:focus,
+.navbar .btn:active,
+.navbar .btn:focus:active {
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+}
+.navbar .btn.active:focus,
+.navbar .btn.active:active {
+  background: var(--brand) !important;
+  color: #fff !important;
+  box-shadow: 0 0 12px rgba(0,114,255,.6) !important;
+}
+
+/* =========================================
+   Hero
+   ========================================= */
+.hero {
+  background: linear-gradient(135deg, #8cb6e7 0%, #bfffff 60%);
+  padding: 24px 0;
+  text-align: center;
+}
+.hero h1 {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  margin: 0 0 .5rem;
+}
+.hero p {
+  font-size: clamp(1.85rem, 2.2vw, 1.5rem);
+  font-weight: 600;
+  color: var(--muted);
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* =========================================
+   Growth Cards (Pricing) + Ribbon
+   ========================================= */
+.growth-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.growth-card {
+  --bg: #0d6efd; /* fallback */
+  background: var(--bg);
+  color: #fff;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow-2);
+  position: relative;
+  overflow: hidden;
+}
+.growth-minimal  { --bg: #28a745; }   /* green */
+.growth-standard { --bg: #0d6efd; }   /* blue */
+.growth-explosive{ --bg: #dc3545; }   /* red */
+
+.growth-card h3 {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 2.4vw, 2.1rem);
+  margin: 0 0 .25rem 0;
+}
+.growth-card h4 {
+  font-weight: 800;
+  font-size: clamp(1.3rem, 2vw, 1.8rem);
+  margin: 0;
+}
+.growth-card ul {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  margin-top: 1rem;
+  padding-left: 1.1rem;
+}
+.growth-card li { margin-bottom: .4rem; }
+
+/* readable strike-through on colored backgrounds */
+.growth-card .text-muted { color: rgba(255,255,255,.85) !important; }
+.growth-card .text-success { color: #fff !important; }
+
+/* corner ribbon */
+.ribbon {
+  position: absolute;
+  top: 12px;
+  right: -44px;
+  transform: rotate(45deg);
+  background: #ffc107;
+  color: #000;
+  padding: 6px 56px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+  z-index: 10;
+}
+
+/* If Bootstrap .card markup appears inside */
+.growth-card.card,
+.growth-card .card-body { background: transparent !important; border: 0 !important; }
+
+/* =========================================
+   Why Choose Us — Stacked Notepad Style
+   ========================================= */
+.features-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 0;
+}
+.feature-vert {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: var(--shadow-1);
+  transition: transform .2s ease, box-shadow .2s ease;
+  border-left: 6px solid rgba(0,114,255,.25);
+}
+.feature-vert:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+}
+.feature-vert__img {
+  width: 220px;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 6px;
+}
+.feature-vert__content { flex: 1; }
+.feature-vert__title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+.feature-vert__text {
+  font-size: 1.5rem;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0;
+}
+/* subtle alternation */
+.features-vertical .feature-vert:nth-child(odd) { background: #fefefe; }
+.features-vertical .feature-vert:nth-child(even){ background: #fafcff; }
+
+/* =========================================
+   Footer
+   ========================================= */
+footer {
+  background: #0f172a;     /* slate-900 */
+  color: #e5e7eb;          /* slate-200 */
+  font-size: .95rem;
+}
+
+/* =========================================
+   Buttons (generic helpers)
+   ========================================= */
+.btn-primary-soft {
+  background: rgba(65, 176, 196, 0.87);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgba(0,114,255,.15);
+  border-radius: 10px;
+  padding: .6rem 1rem;
+  transition: all .2s ease;
+}
+.btn-primary-soft:hover {
+  background: rgba(0,114,255,.18);
+  transform: translateY(-1px);
+}
+
+.btn-primary-soft.btn-xl {
+  padding: 1.1rem 2.6rem;
+  font-size: 1.85rem;
+  border-width: 2px;
+  border-radius: 14px;
+}
+
+
+/* =========================================
+   Responsive
+   ========================================= */
+@media (max-width: 992px) {
+  .growth-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 576px) {
+  .growth-grid { grid-template-columns: 1fr; }
+  .feature-vert {
+    flex-direction: column;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .feature-vert__img {
+    width: 100px;
+    margin-bottom: 10px;
+  }
+  .navbar .btn { padding: .5rem .75rem; }
+}
+
