@@ -1,4 +1,4 @@
-/* =========================================
+/*=========================================
    WeblyLocal — Global Styles (Clean)
    ========================================= */
 
@@ -113,8 +113,8 @@ a:hover { text-decoration: underline; }
    Hero
    ========================================= */
 .hero {
-  background: linear-gradient(135deg, #eef6ff 0%, #ffffff 60%);
-  padding: 72px 0;
+  background: linear-gradient(135deg, #8cb6e7 0%, #bfffff 60%);
+  padding: 24px 0;
   text-align: center;
 }
 .hero h1 {
@@ -218,7 +218,7 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 10px 28px rgba(0,0,0,.08);
 }
 .feature-vert__img {
-  width: 120px;
+  width: 220px;
   height: auto;
   flex-shrink: 0;
   border-radius: 6px;
@@ -253,8 +253,8 @@ footer {
    Buttons (generic helpers)
    ========================================= */
 .btn-primary-soft {
-  background: rgba(0,114,255,.12);
-  color: var(--brand);
+  background: rgba(65, 176, 196, 0.87);
+  color: rgb(0, 0, 0);
   border: 1px solid rgba(0,114,255,.15);
   border-radius: 10px;
   padding: .6rem 1rem;
@@ -264,6 +264,14 @@ footer {
   background: rgba(0,114,255,.18);
   transform: translateY(-1px);
 }
+
+.btn-primary-soft.btn-xl {
+  padding: 1.1rem 2.6rem;
+  font-size: 1.85rem;
+  border-width: 2px;
+  border-radius: 14px;
+}
+
 
 /* =========================================
    Responsive
@@ -284,3 +292,4 @@ footer {
   }
   .navbar .btn { padding: .5rem .75rem; }
 }
+
