@@ -4,38 +4,45 @@
 {% block title %}About Us - Webly{% endblock %}
 
 {% block content %}
-<section class="py-5 bg-light text-center">
+
+<!-- HERO -->
+<section class="hero section text-center">
   <div class="container">
-    <h1 class="display-2 fw-bold">About Webly</h1>
-    <p class="lead fs-4 mt-3">
-      We’re on a mission to help small businesses thrive online — without breaking the bank.
-    </p>
+    <h1>About Webly</h1>
+    <p>We’re on a mission to help small businesses thrive online — without breaking the bank.</p>
   </div>
 </section>
 
-<section class="py-5">
+<!-- WHO WE ARE (uses your notepad-style block) -->
+<section class="section">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-6 mb-4 mb-md-0">
-        <img src="{% static 'website/images/team.jpg' %}" alt="Team at work" class="img-fluid rounded shadow">
-      </div>
-      <div class="col-md-6">
-        <h3 class="fs-2 mb-3">Who We Are</h3>
-        <p class="fs-5">
-          Webly is your affordable digital marketing partner. We specialize in professional websites, smart social media management, and local SEO — all tailored for small business owners who want results, not fluff.
+    <div class="feature-vert">
+      <img
+        loading="lazy"
+        src="{% static 'website/images/team.jpg' %}"
+        alt="Our team at work"
+        class="feature-vert__img"
+      />
+      <div class="feature-vert__content">
+        <h2 class="feature-vert__title">Who We Are</h2>
+        <p class="feature-vert__text">
+          Webly is your affordable digital marketing partner. We specialize in professional websites,
+          smart social media management, and local SEO — tailored for small business owners who want results, not fluff.
         </p>
-        <p class="fs-5">
-          Whether you’re just starting or ready to scale, we’ve got packages that grow with you — and we make it all easy.
+        <p class="feature-vert__text">
+          Whether you’re just starting or ready to scale, we’ve got packages that grow with you — and we make it easy.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-5 bg-light text-center">
+<!-- CTA -->
+<section class="section section--soft text-center">
   <div class="container">
-    <h3 class="fs-2">Ready to grow your online presence?</h3>
-    <a href="/contact" class="btn btn-primary btn-lg mt-3">Let’s Talk</a>
+    <h2 class="mb-2">Ready to grow your online presence?</h2>
+    <a href="{% url 'website:contact' %}" class="btn-primary-soft d-inline-block mt-3">Let’s Talk</a>
   </div>
 </section>
+
 {% endblock %}

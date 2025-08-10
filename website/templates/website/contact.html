@@ -4,48 +4,65 @@
 {% block title %}Contact Us - Webly{% endblock %}
 
 {% block content %}
-<section class="py-5 bg-primary text-white text-center">
+
+<!-- HERO -->
+<section class="hero section text-center">
   <div class="container">
-    <h1 class="display-2 fw-bold">Let's Get in Touch</h1>
-    <p class="lead fs-4">Have questions? Ready to grow your business? Drop us a line.</p>
+    <h1>Let's Get in Touch</h1>
+    <p>Have questions? Ready to grow your business? Drop us a line.</p>
   </div>
 </section>
 
-<section class="py-5">
+<!-- CONTACT -->
+<section class="section">
   <div class="container">
-    <div class="row">
+    <div class="row g-4 align-items-start">
 
-      <!-- Contact Form -->
-      <div class="col-md-7 mb-5 mb-md-0">
-        <h3 class="fs-2 mb-4">Send Us a Message</h3>
-        <form method="post" action="">
-          {% csrf_token %}
-          <div class="mb-3">
-            <label for="name" class="form-label fs-5">Your Name</label>
-            <input type="text" id="name" name="name" class="form-control form-control-lg" required>
-          </div>
-          <div class="mb-3">
-            <label for="email" class="form-label fs-5">Your Email</label>
-            <input type="email" id="email" name="email" class="form-control form-control-lg" required>
-          </div>
-          <div class="mb-3">
-            <label for="message" class="form-label fs-5">Your Message</label>
-            <textarea id="message" name="message" class="form-control form-control-lg" rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
-        </form>
+      <!-- Form -->
+      <div class="col-md-7">
+        <div class="rounded-xl shadow-1 bg-white" style="padding:24px;">
+          <h2 class="mb-3" style="margin-top:0;">Send Us a Message</h2>
+          <form method="post" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="name" class="form-label">Your Name</label>
+              <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Your Email</label>
+              <input type="email" id="email" name="email" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label for="message" class="form-label">Your Message</label>
+              <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary-soft d-inline-block">Send Message</button>
+          </form>
+        </div>
       </div>
 
-      <!-- Contact Info -->
+      <!-- Info -->
       <div class="col-md-5">
-        <h3 class="fs-2 mb-4">Contact Info</h3>
-        <p class="fs-5"><strong>Email:</strong> contact@weblylocal.com</p>
-        <p class="fs-5"><strong>Location:</strong> Porter, Texas, USA</p>
-        <p class="fs-5"><strong>Hours:</strong> Mon–Fri, 9am–5pm CST</p>
-        <img src="{% static 'website/images/contact.jpg' %}" alt="Contact us" class="img-fluid rounded shadow mt-4">
+        <div class="rounded-xl shadow-1 bg-white" style="padding:24px;">
+          <h2 class="mb-3" style="margin-top:0;">Contact Info</h2>
+          <p><strong>Email:</strong> contact@weblylocal.com</p>
+          <p><strong>Location:</strong> Porter, Texas, USA</p>
+          <p><strong>Hours:</strong> Mon–Fri, 9am–5pm CST</p>
+          <img
+            loading="lazy"
+            src="{% static 'website/images/contact.jpg' %}"
+            alt="Contact us"
+            class="img-fluid rounded-xl shadow-1"
+            style="margin-top:12px;"
+          >
+        </div>
       </div>
 
     </div>
   </div>
 </section>
+
 {% endblock %}
