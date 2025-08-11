@@ -11,22 +11,22 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from django.core.management.utils import get_random_secret_key
 import dj_database_url
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Default to True locally (no .env). In Render, set DEBUG=False via env.
+DEBUG = os.getenv("DEBUG", "True") == "True"
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# Use env key if provided; otherwise generate a dev-only key
 SECRET_KEY = os.getenv("SECRET_KEY")
 if not SECRET_KEY:
     if DEBUG:
-        SECRET_KEY = "dev-secret-dont-use"
+        SECRET_KEY = get_random_secret_key()
     else:
-        raise RuntimeError("SECRET_KEY not set") 
+        raise RuntimeError("SECRET_KEY not set")
+
 
 # Hosts
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "weblylocal.com", "www.weblylocal.com"]

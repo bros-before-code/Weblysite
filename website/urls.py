@@ -1,12 +1,10 @@
 from django.urls import path
 from . import views
 
-app_name = 'website'
-
+app_name = "website"  # <-- important
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('growth/', views.growth, name='growth'),
-    path('about/', views.about, name='about'),
-    path('contact/', views.contact, name='contact'),
+    path("about/", views.about, name="about"),
+    path("contact/", views.contact, name="contact"),
+    path("", views.home, name="home"),          # if you have a home view
+    path("growth/", views.growth, name="growth"),
 ]
-
