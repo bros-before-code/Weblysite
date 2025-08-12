@@ -125,7 +125,7 @@ a:hover { text-decoration: underline; }
 .hero p {
   font-size: clamp(1.85rem, 2.2vw, 1.5rem);
   font-weight: 600;
-  color: var(--muted);
+  color: rgb(0, 0, 0);
   line-height: 1.8;
   margin: 0;
 }
@@ -177,7 +177,7 @@ a:hover { text-decoration: underline; }
 /* corner ribbon */
 .ribbon {
   position: absolute;
-  top: 12px;
+  top: 26px;
   right: -44px;
   transform: rotate(45deg);
   background: #ffc107;
@@ -233,7 +233,7 @@ a:hover { text-decoration: underline; }
 .feature-vert__text {
   font-size: 1.5rem;
   line-height: 1.7;
-  color: var(--muted);
+  color: rgb(0, 0, 0);
   margin: 0;
 }
 /* subtle alternation */
@@ -267,7 +267,7 @@ footer {
 
 .btn-primary-soft.btn-xl {
   padding: 1.1rem 2.6rem;
-  font-size: 1.85rem;
+  font-size: 1.65rem;
   border-width: 2px;
   border-radius: 14px;
 }
