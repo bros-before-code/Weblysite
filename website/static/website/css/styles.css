@@ -293,3 +293,52 @@ footer {
   .navbar .btn { padding: .5rem .75rem; }
 }
 
+
+/* =========================================
+   NEW — Bigger Form Text & Buttons
+   ========================================= */
+#contact-form label,
+#contact-form input,
+#contact-form textarea,
+#contact-form select,
+#contact-form .form-check-label {
+  font-size: 1.1rem;
+}
+
+#contact-form input,
+#contact-form textarea,
+#contact-form select {
+  padding: 12px 14px;
+}
+
+#contact-form .form-check-input {
+  width: 1.05em;
+  height: 1.05em;
+  margin-right: 0.75rem; 
+}
+
+#contact-form button {
+  font-size: 1.1rem;
+  padding: 14px 26px;
+}
+
+#contact-form .form-check {
+  margin-bottom: 1rem;
+}
+/* =========================================
+   NEW — Bigger Contact Info Text
+   ========================================= */
+.contact-info h2 {
+  font-size: 1.6rem; /* bigger heading */
+  font-weight: 800;
+}
+
+.contact-info p {
+  font-size: 1.15rem; /* bigger paragraph text */
+  line-height: 1.6;
+}
+
+.contact-info strong {
+  font-size: 1.15rem;
+}
+
