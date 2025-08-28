@@ -1,0 +1,38 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Website Examples - WeblyLocal{% endblock %}
+
+{% block content %}
+<section class="hero section text-center">
+  <div class="container">
+    <h1>Website Examples 🌐</h1>
+    <p class="lead">See how we tailor sites for different industries.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cards-grid">
+      {% for e in examples %}
+      <article class="card">
+        <img src="{{ e.thumb }}" alt="{{ e.title }} thumbnail" class="card__img" loading="lazy" />
+        <div class="card__body">
+          <h3 class="card__title">{{ e.emoji }} {{ e.title }}</h3>
+          <p class="card__text">{{ e.subtitle }}</p>
+          <a href="{% url 'website:example_detail' e.slug %}" class="btn-primary-soft">View Demo</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section section--soft text-center">
+  <div class="cta_container">
+    <h2 class="mb-2">Want something custom?</h2>
+    <p>We’ll adapt any layout to your brand, colors, content, and goals.</p>
+    <a class="btn-primary-soft btn-xl d-inline-block" href="{% url 'website:contact' %}">Let’s Talk</a>
+  </div>
+</section>
+{% endblock %}

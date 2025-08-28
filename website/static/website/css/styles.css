@@ -269,11 +269,18 @@ footer {
   padding: rem 1rem;
   font-size: 1.5rem;
   border-width: 1px;
-  border-radius: 8px;
+  border-radius: 8px; 
   margin-bottom: 10px;
 }
 
-
+/* =========================================
+   Misc Helpers
+   ========================================= */
+.gallery-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:1rem; }
+.gallery-item img { width:100%; height:auto; display:block; border-radius:14px; box-shadow:0 8px 24px rgba(0,0,0,.06); }
+.faq details { background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:12px; padding:1rem 1.2rem; margin-bottom:.75rem; }
+.faq summary { cursor:pointer; }
+.muted { color: var(--muted, #4b5563); }
 
 
 

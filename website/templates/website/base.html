@@ -44,8 +44,8 @@
      href="{% url 'website:home' %}">Home</a>
 </li>
 <li class="nav-item">
-  <a class="btn btn-danger rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'self-starter' %}active{% endif %}"
-     href="{% url 'website:self-starter' %}">Self-Starter</a>
+  <a class="btn btn-danger rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'examples_index' %}active{% endif %}"
+     href="{% url 'website:examples_index' %}">Examples</a>
 </li>
 
 <li class="nav-item">

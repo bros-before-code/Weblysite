@@ -1,0 +1,134 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}{{ page.seo_title|default:page.title }} - WeblyLocal{% endblock %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<nav class="section py-2" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="{% url 'website:examples_index' %}" class="muted">← Back to Examples</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero section text-center">
+  <div class="container">
+    <h1>{{ page.emoji }} {{ page.title }}</h1>
+    <p class="lead">{{ page.subtitle }}</p>
+  </div>
+</section>
+
+<!-- PREVIEW (iframe if live demo, else screenshots) -->
+<section class="section">
+  <div class="container">
+    {% if page.demo_url %}
+      <div class="demo-frame-wrap" style="border-radius:14px; overflow:hidden; box-shadow:0 10px 30px rgba(0,0,0,.08);">
+        <iframe
+          src="{{ page.demo_url }}"
+          title="{{ page.title }} demo"
+          style="width:100%; height:700px; border:0;"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+        ></iframe>
+      </div>
+      <p class="small mt-2 muted text-center">Interactive demo is a sample layout. Final builds are tailored to your brand, colors, and content.</p>
+    {% else %}
+      <div class="gallery-grid">
+        {% for img in page.gallery %}
+          <figure class="gallery-item">
+            <img src="{% static img %}" alt="{{ page.title }} screenshot {{ forloop.counter }}" loading="lazy">
+          </figure>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- WHY THIS WORKS -->
+<section class="section section--soft">
+  <div class="container">
+    <div class="feature-vert">
+      <img
+        loading="lazy"
+        src="{% static page.highlight_image %}"
+        alt="{{ page.title }} highlight"
+        class="feature-vert__img"
+      />
+      <div class="feature-vert__content">
+        <h2 class="feature-vert__title">Why This Works for {{ page.audience_label }}</h2>
+        <ul class="feature-list">
+          {% for point in page.points %}
+            <li>{{ point }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY FEATURES -->
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Included Features</h2>
+    <div class="cards-grid">
+      {% for feat in page.features %}
+      <article class="card">
+        <div class="card__body">
+          <h3 class="card__title">{{ feat.title }}</h3>
+          <p class="card__text">{{ feat.desc }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- PRICING BLURB / CTA -->
+<section class="section section--soft text-center">
+  <div class="cta_container">
+    <h2 class="mb-2">Get a {{ page.short_label }} site like this</h2>
+    <p>{{ page.cta_blurb }}</p>
+    <a href="{% url 'website:contact' %}" class="btn-primary-soft btn-xl d-inline-block mt-2">Request a Quote</a>
+  </div>
+</section>
+
+<!-- FAQ (optional) -->
+{% if page.faq and page.faq|length %}
+<section class="section">
+  <div class="container">
+    <h2 class="text-center mb-4">Common Questions</h2>
+    <div class="faq">
+      {% for qa in page.faq %}
+        <details class="faq-item">
+          <summary><strong>{{ qa.q }}</strong></summary>
+          <p class="mt-2">{{ qa.a }}</p>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- JSON-LD for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{{ page.seo_title|default:page.title }}",
+  "description": "{{ page.seo_desc|default:page.subtitle }}",
+  "brand": {"@type": "Brand", "name": "WeblyLocal"},
+  "category": "Web Design",
+  "url": "{{ request.build_absolute_uri }}",
+  "image": [
+    {% if page.demo_url %}
+      "{{ page.og_image }}"
+    {% else %}
+      {% for img in page.gallery %}"{{ request.build_absolute_uri }}{% static img %}"{% if not forloop.last %},{% endif %}{% endfor %}
+    {% endif %}
+  ]
+}
+</script>
+
+{% endblock %}
