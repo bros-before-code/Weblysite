@@ -10,6 +10,9 @@ from leads.models import Lead
 def home(request):
     return render(request, 'website/home.html')
 
+def self_starter(request):
+    return render(request, 'website/self_starter.html')
+
 def growth(request):
     return render(request, 'website/growth.html')
 

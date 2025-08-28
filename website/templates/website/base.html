@@ -30,7 +30,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light py-3 shadow-sm">
   <div class="container">
-    <a class="navbar-brand" href="/" style="font-size: 3.5rem; font-weight: bold; background: linear-gradient(45deg, #00C6FF, #0072FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
+    <a class="navbar-brand" href="/" style="font-size: 3rem; font-weight: bold; background: linear-gradient(45deg, #00C6FF, #0072FF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 1px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">
       WeblyLocal
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -38,11 +38,16 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto" style="font-size: 1.2rem;">
+      <ul class="navbar-nav ms-auto" style="font-size: 1rem;">
         <li class="nav-item">
   <a class="btn btn-primary rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'home' %}active{% endif %}"
      href="{% url 'website:home' %}">Home</a>
 </li>
+<li class="nav-item">
+  <a class="btn btn-danger rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'self-starter' %}active{% endif %}"
+     href="{% url 'website:self-starter' %}">Self-Starter</a>
+</li>
+
 <li class="nav-item">
   <a class="btn btn-success rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'growth' %}active{% endif %}"
      href="{% url 'website:growth' %}">Growth</a>
@@ -55,6 +60,8 @@
   <a class="btn btn-danger rounded-pill mx-1 px-3 {% if request.resolver_match.url_name == 'contact' %}active{% endif %}"
      href="{% url 'website:contact' %}">Contact</a>
 </li>
+
+
 
       </ul>
     </div>

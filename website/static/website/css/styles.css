@@ -36,7 +36,7 @@ a { color: var(--brand); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 /* Sections */
-.section { padding: 56px 0; }
+.section { padding: 24px 0; }
 .section--soft { background: var(--soft); }
 
 /* Utilities */
@@ -54,8 +54,8 @@ a:hover { text-decoration: underline; }
    ========================================= */
 .navbar {
   box-shadow: 0 2px 12px rgba(0,0,0,.05);
-  padding-top: .5rem;
-  padding-bottom: .5rem;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 .navbar .container { padding-top: 0; padding-bottom: 0; }
 
@@ -114,16 +114,16 @@ a:hover { text-decoration: underline; }
    ========================================= */
 .hero {
   background: linear-gradient(135deg, #8cb6e7 0%, #bfffff 60%);
-  padding: 24px 0;
+  padding: 2px 0;
   text-align: center;
 }
 .hero h1 {
-  font-size: clamp(1.7rem, 4vw, 2.65rem);
+  font-size: clamp(1.7rem, 4vw, 2.25rem);
   font-weight: 800;
   margin: 0 0 .5rem;
 }
 .hero p {
-  font-size: clamp(1.25rem, 2.2vw, 1.5rem);
+  font-size: clamp(1.25rem, 2.2vw, 1.2rem);
   font-weight: 600;
   color: rgb(0, 0, 0);
   line-height: 1.8;
@@ -218,20 +218,20 @@ a:hover { text-decoration: underline; }
   box-shadow: 0 10px 28px rgba(0,0,0,.08);
 }
 .feature-vert__img {
-  width: 320px;
+  width: 240px;
   height: auto;
   flex-shrink: 0;
   border-radius: 6px;
 }
 .feature-vert__content { flex: 1; }
 .feature-vert__title {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   font-weight: 800;
   margin: 0 0 8px;
   color: var(--text);
 }
 .feature-vert__text {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   line-height: 1.7;
   color: rgb(0, 0, 0);
   margin: 0;
@@ -266,11 +266,15 @@ footer {
 }
 
 .btn-primary-soft.btn-xl {
-  padding: 1.1rem 2rem;
+  padding: rem 1rem;
   font-size: 1.5rem;
-  border-width: 2px;
-  border-radius: 12px;
+  border-width: 1px;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
+
+
+
 
 
 /* =========================================
