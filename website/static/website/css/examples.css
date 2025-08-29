@@ -1,0 +1,83 @@
+/* website/static/website/css/examples.css */
+
+/* Hero with diagonal color split */
+.demo-hero__top {
+  position: relative;
+  background: var(--bottom, #0072FF);
+  color: #fff;
+  padding: 3.5rem 0 2rem;
+  overflow: clip;
+}
+
+.demo-hero__top::before {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 55%;
+  height: 58%;
+  background: var(--top, #00C6FF);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+/* Example gallery */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
+  gap: 1rem;
+}
+.gallery-item img {
+  width: 100%;
+  border-radius: 14px;
+  display: block;
+}
+
+/* Feature list */
+.feature-list {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.feature-list li { margin-bottom: .5rem; }
+
+/* Cards grid */
+/* ===== Examples index cards ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.card {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+}
+
+.card__img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;        /* keeps a nice thumb shape */
+  object-fit: cover;
+}
+
+.card__body { padding: 0.9rem 1rem 1.1rem; }
+.card__title { font-weight: 700; margin-bottom: .25rem; }
+.card__text  { color: #6b7280; font-size: .95rem; }
+
+/* Optional: button spacing inside cards */
+.card .btn-primary-soft { margin-top: .5rem; }
+
+
+/* FAQ items */
+.faq-item {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.06);
+  border-radius: 12px;
+  padding: .75rem 1rem;
+}

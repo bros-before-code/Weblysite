@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.core.mail import send_mail
@@ -84,12 +84,11 @@ INDUSTRY_EXAMPLES = {
         "short_label": "Restaurant",
         "audience_label": "Restaurants & Cafés",
         "subtitle": "Menus, online ordering, hours, and location—front and center.",
-        # If you have a live demo, add the URL below; otherwise leave None and we’ll show screenshots.
-        "demo_url": None,  # e.g. "https://restaurant.weblylocal.com"
-        "og_image": "/static/website/images/examples/restaurant-hero.png",
-        "highlight_image": "website/images/examples/restaurant-highlight.png",
+        "demo_url": None,
+        "og_image": "/static/website/images/examples/rest-thumb.png",
+        "highlight_image": "website/images/examples/rest.png",
         "gallery": [
-            "website/images/examples/restaurant-01.png",
+            "website/images/examples/rest-menu.png",
             "website/images/examples/restaurant-02.png",
             "website/images/examples/restaurant-03.png",
         ],
@@ -101,17 +100,20 @@ INDUSTRY_EXAMPLES = {
         "features": [
             {"title": "Menu & Specials", "desc": "Structured menu, specials ribbon, and dietary tags."},
             {"title": "Ordering/Reservations", "desc": "Integrate DoorDash, Toast, OpenTable, or custom forms."},
-            {"title": "Local SEO", "desc": "Schema for restaurant, hours, and Google Business Profile sync."},
+            {"title": "Local SEO", "desc": "Restaurant schema, hours, and GBP sync."},
         ],
         "cta_blurb": "Includes menu setup, photo galleries, hours, and integrations you already use.",
         "seo_title": "Restaurant Website Design Demo",
         "seo_desc": "See a high-converting restaurant site layout: menus, ordering, hours, and local SEO baked in.",
         "faq": [
             {"q": "Can you connect online ordering I already use?",
-             "a": "Yes. We can embed or link to DoorDash, Uber Eats, Toast, or your POS’s native ordering."},
+             "a": "Yes—DoorDash, Uber Eats, Toast, or your POS’s native ordering."},
             {"q": "Can I update my menu myself?",
-             "a": "Absolutely. We’ll give you an editor so you can change items, prices, and photos anytime."}
+             "a": "Absolutely. You’ll get an editor to change items, prices, and photos anytime."}
         ],
+        # Optional per-demo brand colors for styling:
+        "brand_top": "#550305",
+        "brand_bottom": "#F62944",
     },
 
     "salon": {
@@ -121,7 +123,7 @@ INDUSTRY_EXAMPLES = {
         "audience_label": "Salons & Spas",
         "subtitle": "Booking-first design with services, stylists, and photo proof.",
         "demo_url": None,
-        "og_image": "/static/website/images/examples/salon-hero.png",
+        "og_image": "/static/website/images/examples/salon-thumb.png",
         "highlight_image": "website/images/examples/salon-highlight.png",
         "gallery": [
             "website/images/examples/salon-01.png",
@@ -138,25 +140,30 @@ INDUSTRY_EXAMPLES = {
             {"title": "Reviews", "desc": "Pull in Google reviews to boost social proof."},
         ],
         "cta_blurb": "Perfect for stylists who want more bookings without DM chaos.",
+        "seo_title": "Salon Website Demo",
+        "seo_desc": "Booking-first salon website with services, pricing, reviews, and gallery.",
         "faq": [],
+        "brand_top": "#F9D8FF",
+        "brand_bottom": "#B86AD9",
     },
-
-    # Add more: contractor, retail, professional, etc.
 }
 
+# -----------------------------
+# EXAMPLES: index + detail
+# -----------------------------
 def examples_index(request):
-    # Build a lightweight list to render the grid.
-    listing = []
-    for slug, data in INDUSTRY_EXAMPLES.items():
-        listing.append({
-            "slug": slug,
-            "title": data["title"],
-            "emoji": data["emoji"],
-            "subtitle": data["subtitle"],
-            "thumb": data.get("og_image") or "/static/website/images/examples/placeholder.png",
-        })
+    listing = [{
+        "slug": slug,
+        "title": data["title"],
+        "emoji": data["emoji"],
+        "subtitle": data["subtitle"],
+        "thumb": data.get("og_image") or "/static/website/images/examples/placeholder.png",
+    } for slug, data in INDUSTRY_EXAMPLES.items()]
     return render(request, "website/examples/index.html", {"examples": listing})
 
 def example_detail(request, slug):
-    page = get_object_or_404(INDUSTRY_EXAMPLES, slug)
-    return render(request, "website/examples/detail.html", {"page": INDUSTRY_EXAMPLES[slug]})
+    page = INDUSTRY_EXAMPLES.get(slug)
+    if not page:
+        raise Http404("Example not found.")
+    # also pass slug so templates can put a body class, etc.
+    return render(request, "website/examples/detail.html", {"page": page, "slug": slug})

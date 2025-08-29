@@ -3,6 +3,11 @@
 
 {% block title %}{{ page.seo_title|default:page.title }} - WeblyLocal{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/examples.css' %}">
+{% endblock %}
+
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -13,12 +18,25 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero section text-center">
-  <div class="container">
-    <h1>{{ page.emoji }} {{ page.title }}</h1>
-    <p class="lead">{{ page.subtitle }}</p>
+<section class="demo-hero">
+  <div class="demo-hero__top"
+       style="--top: {{ page.brand_top|default:'#00C6FF' }};
+              --bottom: {{ page.brand_bottom|default:'#0072FF' }};">
+    <div class="container demo-hero__inner">
+      <div class="demo-hero__copy">
+        <div class="eyebrow">{{ page.emoji }} {{ page.audience_label }}</div>
+        <h1>{{ page.title }}</h1>
+        <p class="lead">{{ page.subtitle }}</p>
+      </div>
+      {% if page.highlight_image %}
+      <div class="demo-hero__image">
+        <img src="{% static page.highlight_image %}" alt="">
+      </div>
+      {% endif %}
+    </div>
   </div>
 </section>
+
 
 <!-- PREVIEW (iframe if live demo, else screenshots) -->
 <section class="section">
