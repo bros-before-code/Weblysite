@@ -1,5 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse,  Http404
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -165,5 +165,96 @@ def example_detail(request, slug):
     page = INDUSTRY_EXAMPLES.get(slug)
     if not page:
         raise Http404("Example not found.")
-    # also pass slug so templates can put a body class, etc.
+
+    if slug == "restaurant":
+        menu = {
+        "Starters": [
+            {
+                "name": "Garlic Parmesan Fries",
+                "price": "6.50",
+                "popular": True,
+                "desc": "Hand-cut fries, roasted garlic, parmesan, parsley.",
+                "image": "website/images/menu/fries.png",
+            },
+            {
+                "name": "Tomato Basil Soup",
+                "price": "5.00",
+                "desc": "Creamy tomato, fresh basil, grilled sourdough.",
+                "image": "website/images/menu/soup.png",
+            },
+            {
+                "name": "Crispy Calamari",
+                "price": "9.75",
+                "popular": True,
+                "desc": "Lemon aioli, pickled peppers.",
+                "image": "website/images/menu/calamari.png",
+            },
+        ],
+        "Mains": [
+            {
+                "name": "Smash Burger",
+                "price": "12.00",
+                "popular": True,
+                "desc": "Two patties, cheddar, special sauce, brioche.",
+                "image": "website/images/menu/burger.png",
+            },
+            {
+                "name": "Margherita Pizza",
+                "price": "13.50",
+                "desc": "San Marzano, fresh mozzarella, basil.",
+                "image": "website/images/menu/pizza.png",
+            },
+            {
+                "name": "Chicken Alfredo",
+                "price": "14.25",
+                "desc": "Fettuccine, parmesan cream, black pepper.",
+                "image": "website/images/menu/alfredo.png",
+            },
+        ],
+        "Drinks": [
+            {
+                "name": "House Lemonade",
+                "price": "3.50",
+                "popular": True,
+                "desc": "Fresh-squeezed, lightly sweet.",
+                "image": "website/images/menu/lemonade.png",
+            },
+            {
+                "name": "Iced Tea",
+                "price": "2.95",
+                "desc": "Unsweet or sweet, refillable.",
+                "image": "website/images/menu/iced-tea.png",
+            },
+            {
+                "name": "Cold Brew",
+                "price": "4.25",
+                "desc": "12-hour steep, chocolatey finish.",
+                "image": "website/images/menu/cold-brew.png",
+            },
+        ],
+        "Desserts": [
+            {
+                "name": "Molten Chocolate Cake",
+                "price": "7.25",
+                "popular": True,
+                "desc": "Warm center, vanilla bean ice cream.",
+                "image": "website/images/menu/cake.png",
+            },
+            {
+                "name": "New York Cheesecake",
+                "price": "6.95",
+                "desc": "Graham crust, strawberry compote.",
+                "image": "website/images/menu/cheesecake.png",
+            },
+        ],
+    }
+
+    return render(
+        request,
+        "website/examples/restaurant_detail.html",
+        {"page": page, "slug": slug, "menu": menu},
+    )
+
+
+    # All other examples use the generic template
     return render(request, "website/examples/detail.html", {"page": page, "slug": slug})

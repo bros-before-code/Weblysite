@@ -1,0 +1,330 @@
+{% extends "website/base.html" %}
+{% load static %}
+
+{% block title %}Restaurant Website Demo - WeblyLocal{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'website/css/restaurant.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- Back link -->
+<div class="container mt-4">
+  <a href="{% url 'website:examples_index' %}" class="back-link">← Back to Examples</a>
+</div>
+
+<!-- HERO (custom; no .hero class) -->
+<section class="hero-restaurant">
+  <div class="hero-restaurant__content">
+    <p class="eyebrow">🍽️ Restaurants & Cafés</p>
+    <h1 class="hero-restaurant__title">
+      {{ page.title|default:"Restaurant Website Demo" }}
+    </h1>
+    <p class="lead hero-restaurant__subtitle">
+      {{ page.subtitle|default:"Menus, online ordering, hours, and location—front and center." }}
+    </p>
+  </div>
+</section>
+
+<!-- HOURS & LOCATION -->
+<section class="info-strip">
+  <div class="info-strip__row">
+    <div class="info-strip__col">
+      <div class="info__label">Status</div>
+      <div class="info__value">
+        <span id="open-status" class="status-badge">Checking…</span>
+      </div>
+    </div>
+
+    <div class="info-strip__col">
+      <div class="info__label">Today’s Hours</div>
+      <div class="info__value">
+        {{ page.hours_today|default:"11:00 AM – 9:00 PM" }}
+      </div>
+      <details class="hours-details">
+        <summary>Full hours</summary>
+        <ul class="hours-list">
+          <li>Mon–Thu: 11:00 AM – 9:00 PM</li>
+          <li>Fri–Sat: 11:00 AM – 10:00 PM</li>
+          <li>Sun: 11:00 AM – 8:00 PM</li>
+        </ul>
+      </details>
+    </div>
+
+    <div class="info-strip__col">
+      <div class="info__label">Location</div>
+      <div class="info__value">
+        123 Main St, Houston, TX USA
+      </div>
+      <div class="info__actions">
+        <a class="btn-ghost" href="https://www.google.com/maps/dir/?api=1&destination=123+Main+St+Houston+USA" target="_blank" rel="noopener">Directions</a>
+        <a class="btn-ghost" href="tel:+15555551234">Call</a>
+      </div>
+    </div>
+
+    <div class="info-strip__col info-strip__map">
+      <iframe
+        title="Map"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=123+Main+St+Houston+USA&output=embed">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- MENU (Tabbed) -->
+<section class="section menu">
+  <div class="container-menu">
+    <h2 class="menu__title">Menu</h2>
+
+    <!-- Tabs -->
+    <div class="menu-tabs" role="tablist" aria-label="Menu sections">
+      {% for section, items in menu.items %}
+        {% with sid=section|slugify %}
+        <button
+          class="menu-tab{% if forloop.first %} is-active{% endif %}"
+          role="tab"
+          id="tab-{{ sid }}"
+          aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          aria-controls="panel-{{ sid }}"
+          data-target="panel-{{ sid }}"
+          type="button">
+          {{ section }}
+        </button>
+        {% endwith %}
+      {% endfor %}
+    </div>
+
+    <!-- Panels -->
+    <div class="menu-panels">
+      {% for section, items in menu.items %}
+        {% with sid=section|slugify %}
+        <article
+          class="menu-panel{% if forloop.first %} is-active{% endif %}"
+          id="panel-{{ sid }}"
+          role="tabpanel"
+          aria-labelledby="tab-{{ sid }}"
+          {% if not forloop.first %}hidden{% endif %}>
+          <div class="menu-card">
+            <h3 class="menu-card__heading">{{ section }}</h3>
+            <ul class="menu-list">
+              {% for it in items %}
+              <li class="menu-item">
+                {% if it.image %}
+                  <img src="{% static it.image %}" alt="{{ it.name }}" class="menu-item__img">
+                {% endif %}
+
+                <div class="menu-item__info">
+                  <span class="menu-item__name">
+                    {{ it.name }}{% if it.popular %} <span class="menu-item__badge">🔥</span>{% endif %}
+                  </span>
+                  {% if it.desc %}<p class="menu-item__desc">{{ it.desc }}</p>{% endif %}
+                </div>
+
+                <div class="menu-item__side">
+                  <div class="menu-item__price">${{ it.price }}</div>
+                  <button
+                    class="btn-add-to-cart"
+                    type="button"
+                    data-id="{{ it.name|slugify }}"
+                    data-name="{{ it.name }}"
+                    data-price="{{ it.price }}">
+                    Add to cart
+                  </button>
+                </div>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </article>
+        {% endwith %}
+      {% endfor %}
+    </div>
+
+    <div class="menu__note">
+      <small>🔥 = Popular item • Prices shown are demo placeholders.</small>
+    </div>
+
+    <!-- CART -->
+    <div class="cart" aria-live="polite">
+      <div class="cart__header">
+        <h3 class="cart__title">Your Cart</h3>
+        <button class="cart__clear" type="button">Clear</button>
+      </div>
+      <ul class="cart__items" id="cart-items"></ul>
+      <div class="cart__footer">
+        <div class="cart__total-label">Total</div>
+        <div class="cart__total" id="cart-total">$0.00</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tabs script -->
+<script>
+(function () {
+  const tabs = document.querySelectorAll('.menu-tab');
+  const panels = document.querySelectorAll('.menu-panel');
+
+  function activate(id) {
+    tabs.forEach(t => {
+      const on = t.dataset.target === id;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    panels.forEach(p => {
+      const on = p.id === id;
+      p.classList.toggle('is-active', on);
+      if (on) p.removeAttribute('hidden'); else p.setAttribute('hidden','');
+    });
+  }
+
+  tabs.forEach(t => t.addEventListener('click', () => activate(t.dataset.target)));
+
+  const hash = location.hash.replace('#','');
+  if (hash) {
+    const target = document.getElementById('panel-' + hash);
+    if (target) activate('panel-' + hash);
+  }
+})();
+</script>
+
+<!-- Cart script -->
+<script>
+(function () {
+  const STORAGE_KEY = "webly-restaurant-cart";
+  const $items = document.getElementById("cart-items");
+  const $total = document.getElementById("cart-total");
+  const $clear = document.querySelector(".cart__clear");
+
+  function loadCart() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+  function saveCart(cart){ localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); }
+  function money(n){ return "$" + (Math.round((n + Number.EPSILON) * 100) / 100).toFixed(2); }
+
+  function addItem(id, name, price) {
+    const cart = loadCart();
+    const p = parseFloat(price);
+    if (Number.isNaN(p)) return;
+    const i = cart.findIndex(x => x.id === id);
+    if (i >= 0) cart[i].qty += 1; else cart.push({ id, name, price: p, qty: 1 });
+    saveCart(cart); render();
+  }
+  function updateQty(id, delta) {
+    const cart = loadCart();
+    const i = cart.findIndex(x => x.id === id);
+    if (i < 0) return;
+    cart[i].qty += delta;
+    if (cart[i].qty <= 0) cart.splice(i, 1);
+    saveCart(cart); render();
+  }
+  function clearCart(){ saveCart([]); render(); }
+
+  function render() {
+    const cart = loadCart();
+    $items.innerHTML = "";
+    let total = 0;
+    cart.forEach(({id, name, price, qty}) => {
+      total += price * qty;
+      const li = document.createElement("li");
+      li.className = "cart__item";
+      li.innerHTML = `
+        <div class="cart__item-name">${name}</div>
+        <div class="cart__item-qty">
+          <button class="cart__btn cart__btn--dec" data-id="${id}" aria-label="Decrease">−</button>
+          <span class="cart__qty">${qty}</span>
+          <button class="cart__btn cart__btn--inc" data-id="${id}" aria-label="Increase">+</button>
+        </div>
+        <div class="cart__item-subtotal">${money(price * qty)}</div>
+      `;
+      $items.appendChild(li);
+    });
+    $total.textContent = money(total);
+  }
+
+  document.querySelectorAll(".btn-add-to-cart").forEach(btn =>
+    btn.addEventListener("click", () => addItem(btn.dataset.id, btn.dataset.name, btn.dataset.price))
+  );
+  $items.addEventListener("click", (e) => {
+    const dec = e.target.closest(".cart__btn--dec");
+    const inc = e.target.closest(".cart__btn--inc");
+    if (dec) updateQty(dec.dataset.id, -1);
+    if (inc) updateQty(inc.dataset.id, +1);
+  });
+  if ($clear) $clear.addEventListener("click", clearCart);
+
+  render();
+})();
+</script>
+<script>
+(function () {
+  // 0=Sun..6=Sat
+  const WEEKLY_HOURS = {
+    0: ["11:00","20:00"],  // Sun
+    1: ["11:00","21:00"],  // Mon
+    2: ["11:00","21:00"],  // Tue
+    3: ["11:00","21:00"],  // Wed
+    4: ["11:00","22:00"],  // Thu
+    5: ["11:00","22:00"],  // Fri
+    6: ["11:00","22:00"],  // Sat
+  };
+
+  function isOpen(now = new Date()) {
+    const day = now.getDay();
+    const span = WEEKLY_HOURS[day];
+    if (!span) return false;
+    const [open, close] = span;
+    const [oh, om] = open.split(":").map(Number);
+    const [ch, cm] = close.split(":").map(Number);
+    const start = new Date(now); start.setHours(oh, om, 0, 0);
+    const end = new Date(now);   end.setHours(ch, cm, 0, 0);
+    return now >= start && now <= end;
+  }
+
+  const el = document.getElementById("open-status");
+  if (!el) return;
+  const open = isOpen();
+  el.textContent = open ? "Open now" : "Closed";
+  el.classList.toggle("is-open", open);
+  el.classList.toggle("is-closed", !open);
+})();
+</script>
+
+{% block extra_meta %}
+  {% if slug == "restaurant" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Your Restaurant Name",
+      "telephone": "+1-555-555-1234",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "123 Main St",
+        "addressLocality": "Houston",
+        "addressRegion": "TX",
+        "postalCode": "77002",
+        "addressCountry": "US"
+      },
+      "url": "{{ request.build_absolute_uri|default_if_none:'' }}",
+      "servesCuisine": ["American"],
+      "priceRange": "$$",
+      "openingHoursSpecification": [
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"11:00","closes":"21:00"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Friday","Saturday"],"opens":"11:00","closes":"22:00"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":"Sunday","opens":"11:00","closes":"20:00"}
+      ]
+    }
+    </script>
+  {% endif %}
+{% endblock %}
+
+
+
+{% endblock %}
